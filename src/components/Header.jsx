@@ -3,9 +3,6 @@ import { Link, NavLink } from 'react-router-dom'
 import Button from '../components/Button'
 
 const navLinks = [
-    { to: '/', label: 'Stays' },
-    { to: '/search', label: 'Search' },
-    { to: '/search?type=resort', label: 'Deals' },
     ]
 
     export default function Header() {
@@ -40,14 +37,19 @@ const navLinks = [
             </nav>
 
             <div className="hidden md:flex items-center gap-2">
+                <Link>
+                <Button variant="primary" size="sm">
+                    List your property
+                </Button>
+                </Link>
                 <Link to="/login">
-                <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                    Sign in
+                <Button variant="white" size="sm">
+                    Register
                 </Button>
                 </Link>
                 <Link to="/signup">
                 <Button variant="white" size="sm">
-                    Register
+                    Sign In
                 </Button>
                 </Link>
             </div>
@@ -70,8 +72,35 @@ const navLinks = [
                 )}
             </button>
             </div>
+            <div>
+                <Link>
+                <Button variant="primary" size="lg" rounded="ridius">
+                    Stays
+                </Button>
+                <Button>
+                    Flights
+                </Button>
+                <Button>
+                    Car Rentals
+                </Button>
+                <Button>
+                    Attractions
+                </Button>
+                <Button>
+                    Airport Taxis
+                </Button>
+                </Link>
+            </div>
+            <hr className="border-white/50 w-full" />
         </div>
-
+        <div className="container-main items-center justify-between mt-16 mb-60">
+            <h1 className="text-7xl font-bold text-white mb-2">
+                Find your next stay
+            </h1>
+            <p className="text-white text-4xl">
+                Search deals on hotels, homes, and much more...
+            </p>
+        </div>
         {menuOpen && (
             <div className="md:hidden bg-primary-dark border-t border-white/10 pb-4">
             <nav className="container-main flex flex-col gap-1 pt-2">
