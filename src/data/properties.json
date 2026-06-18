@@ -1,0 +1,272 @@
+[
+  {
+    "id": "1",
+    "name": "Grand Horizon Hotel",
+    "location": "Paris, France",
+    "type": "hotel",
+    "pricePerNight": 189,
+    "rating": 4.8,
+    "reviewCount": 1243,
+    "stars": 5,
+    "amenities": ["Free WiFi", "Pool", "Spa", "Breakfast included", "Air conditioning", "Room service"],
+    "images": [
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+      "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80"
+    ],
+    "description": "Experience luxury in the heart of Paris. Grand Horizon Hotel offers elegant rooms with stunning city views, world-class dining, and a rooftop pool overlooking the Eiffel Tower.",
+    "roomTypes": [
+      { "name": "Classic Double Room", "capacity": 2, "price": 189 },
+      { "name": "Deluxe Suite", "capacity": 3, "price": 320 },
+      { "name": "Presidential Suite", "capacity": 4, "price": 580 }
+    ],
+    "reviews": [
+      { "author": "Marie L.", "score": 9.2, "comment": "Absolutely stunning hotel with impeccable service. The rooftop pool is a highlight!", "date": "2025-11-12" },
+      { "author": "James K.", "score": 8.8, "comment": "Great location near the metro. Rooms are spacious and beautifully decorated.", "date": "2025-10-28" }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Serenity Beach Resort",
+    "location": "Bali, Indonesia",
+    "type": "resort",
+    "pricePerNight": 145,
+    "rating": 4.7,
+    "reviewCount": 892,
+    "stars": 4,
+    "amenities": ["Free WiFi", "Pool", "Beach access", "Spa", "Restaurant", "Free parking"],
+    "images": [
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800&q=80",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800&q=80"
+    ],
+    "description": "A tranquil beachfront resort nestled among tropical gardens. Perfect for couples and families seeking relaxation with direct access to pristine white sand beaches.",
+    "roomTypes": [
+      { "name": "Garden View Room", "capacity": 2, "price": 145 },
+      { "name": "Ocean View Bungalow", "capacity": 2, "price": 220 },
+      { "name": "Family Villa", "capacity": 5, "price": 380 }
+    ],
+    "reviews": [
+      { "author": "Sarah T.", "score": 9.5, "comment": "Paradise on earth! The beach is steps away and staff are incredibly warm.", "date": "2025-12-01" },
+      { "author": "David M.", "score": 9.0, "comment": "Beautiful resort with amazing spa treatments. Will definitely return.", "date": "2025-11-05" }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Urban Loft Apartments",
+    "location": "New York, USA",
+    "type": "apartment",
+    "pricePerNight": 210,
+    "rating": 4.5,
+    "reviewCount": 567,
+    "stars": 4,
+    "amenities": ["Free WiFi", "Kitchen", "Air conditioning", "Washer", "Elevator", "Fitness center"],
+    "images": [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2cd936?w=800&q=80",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80"
+    ],
+    "description": "Stylish loft apartments in Manhattan with full kitchens and modern amenities. Ideal for extended stays and business travelers who want a home-away-from-home experience.",
+    "roomTypes": [
+      { "name": "Studio Loft", "capacity": 2, "price": 210 },
+      { "name": "One Bedroom Apartment", "capacity": 3, "price": 290 },
+      { "name": "Penthouse Loft", "capacity": 4, "price": 450 }
+    ],
+    "reviews": [
+      { "author": "Alex R.", "score": 8.5, "comment": "Perfect for a week-long business trip. Kitchen was fully equipped.", "date": "2025-10-15" },
+      { "author": "Emily W.", "score": 8.9, "comment": "Great location in SoHo. Clean, modern, and spacious.", "date": "2025-09-22" }
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Azure Bay Villa",
+    "location": "Santorini, Greece",
+    "type": "villa",
+    "pricePerNight": 320,
+    "rating": 4.9,
+    "reviewCount": 412,
+    "stars": 5,
+    "amenities": ["Free WiFi", "Pool", "Sea view", "Kitchen", "Terrace", "Free parking"],
+    "images": [
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
+    ],
+    "description": "A breathtaking cliffside villa with panoramic Aegean Sea views, private infinity pool, and whitewashed interiors typical of Santorini's iconic architecture.",
+    "roomTypes": [
+      { "name": "Master Suite", "capacity": 2, "price": 320 },
+      { "name": "Two Bedroom Villa", "capacity": 4, "price": 520 },
+      { "name": "Luxury Villa with Pool", "capacity": 6, "price": 780 }
+    ],
+    "reviews": [
+      { "author": "Sophie B.", "score": 10, "comment": "The most magical place I've ever stayed. Sunsets from the terrace are unforgettable.", "date": "2025-11-20" },
+      { "author": "Carlos H.", "score": 9.6, "comment": "Private pool, stunning views, and excellent concierge service.", "date": "2025-10-08" }
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Kigali Heights Hotel",
+    "location": "Kigali, Rwanda",
+    "type": "hotel",
+    "pricePerNight": 85,
+    "rating": 4.6,
+    "reviewCount": 328,
+    "stars": 4,
+    "amenities": ["Free WiFi", "Pool", "Breakfast included", "Restaurant", "Air conditioning", "Free parking"],
+    "images": [
+      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80",
+      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+      "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=800&q=80"
+    ],
+    "description": "Modern hotel in the heart of Kigali offering comfortable accommodations with panoramic views of the city hills. Known for warm hospitality and excellent local cuisine.",
+    "roomTypes": [
+      { "name": "Standard Room", "capacity": 2, "price": 85 },
+      { "name": "Superior Room", "capacity": 2, "price": 110 },
+      { "name": "Executive Suite", "capacity": 3, "price": 175 }
+    ],
+    "reviews": [
+      { "author": "Jean-Paul N.", "score": 8.7, "comment": "Great value for money. Breakfast buffet was excellent with local dishes.", "date": "2025-11-18" },
+      { "author": "Amina K.", "score": 9.1, "comment": "Friendly staff and clean rooms. Perfect base for exploring Kigali.", "date": "2025-10-30" }
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Tokyo Skyline Inn",
+    "location": "Tokyo, Japan",
+    "type": "hotel",
+    "pricePerNight": 165,
+    "rating": 4.4,
+    "reviewCount": 756,
+    "stars": 4,
+    "amenities": ["Free WiFi", "Restaurant", "Air conditioning", "Fitness center", "24-hour front desk", "Laundry"],
+    "images": [
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80",
+      "https://images.unsplash.com/photo-1611892440502-42a784e768da?w=800&q=80"
+    ],
+    "description": "Contemporary hotel in Shinjuku with compact yet thoughtfully designed rooms. Steps from shopping, dining, and public transit in one of Tokyo's most vibrant districts.",
+    "roomTypes": [
+      { "name": "Compact Single", "capacity": 1, "price": 120 },
+      { "name": "Standard Twin", "capacity": 2, "price": 165 },
+      { "name": "Corner King Room", "capacity": 2, "price": 240 }
+    ],
+    "reviews": [
+      { "author": "Yuki T.", "score": 8.3, "comment": "Efficient use of space. Great location for exploring Tokyo.", "date": "2025-11-02" },
+      { "author": "Michael P.", "score": 8.6, "comment": "Clean, modern, and the staff helped us navigate the city.", "date": "2025-10-12" }
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Marrakech Riad Oasis",
+    "location": "Marrakech, Morocco",
+    "type": "villa",
+    "pricePerNight": 95,
+    "rating": 4.7,
+    "reviewCount": 489,
+    "stars": 4,
+    "amenities": ["Free WiFi", "Pool", "Breakfast included", "Terrace", "Air conditioning", "Airport shuttle"],
+    "images": [
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&q=80"
+    ],
+    "description": "A hidden gem in the Medina featuring a serene courtyard pool, traditional Moroccan tilework, and rooftop terrace with views of the Atlas Mountains.",
+    "roomTypes": [
+      { "name": "Courtyard Room", "capacity": 2, "price": 95 },
+      { "name": "Rooftop Suite", "capacity": 2, "price": 140 },
+      { "name": "Family Riad", "capacity": 5, "price": 220 }
+    ],
+    "reviews": [
+      { "author": "Fatima A.", "score": 9.3, "comment": "Authentic riad experience with modern comforts. The courtyard is magical.", "date": "2025-12-05" },
+      { "author": "Thomas G.", "score": 9.0, "comment": "Incredible breakfast and the staff arranged a wonderful desert tour.", "date": "2025-11-14" }
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Cape Town Seaside Apartments",
+    "location": "Cape Town, South Africa",
+    "type": "apartment",
+    "pricePerNight": 130,
+    "rating": 4.5,
+    "reviewCount": 634,
+    "stars": 4,
+    "amenities": ["Free WiFi", "Kitchen", "Sea view", "Pool", "Free parking", "Air conditioning"],
+    "images": [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2cd936?w=800&q=80",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80"
+    ],
+    "description": "Self-catering apartments with Table Mountain and ocean views. Located in Sea Point, minutes from beaches, the V&A Waterfront, and Cape Town's best restaurants.",
+    "roomTypes": [
+      { "name": "Studio with Sea View", "capacity": 2, "price": 130 },
+      { "name": "Two Bedroom Apartment", "capacity": 4, "price": 210 },
+      { "name": "Penthouse with Terrace", "capacity": 4, "price": 340 }
+    ],
+    "reviews": [
+      { "author": "Nomsa D.", "score": 8.8, "comment": "Amazing views and well-equipped kitchen. Loved the balcony sunsets.", "date": "2025-11-25" },
+      { "author": "Peter L.", "score": 8.4, "comment": "Great location for exploring Cape Town. Secure parking was a plus.", "date": "2025-10-18" }
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Alpine Lodge Resort",
+    "location": "Zermatt, Switzerland",
+    "type": "resort",
+    "pricePerNight": 275,
+    "rating": 4.8,
+    "reviewCount": 521,
+    "stars": 5,
+    "amenities": ["Free WiFi", "Spa", "Restaurant", "Ski storage", "Fireplace", "Mountain view"],
+    "images": [
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800&q=80",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800&q=80"
+    ],
+    "description": "Luxury alpine resort at the foot of the Matterhorn. Features a world-class spa, gourmet restaurant, and ski-in access during winter months.",
+    "roomTypes": [
+      { "name": "Alpine Room", "capacity": 2, "price": 275 },
+      { "name": "Matterhorn View Suite", "capacity": 2, "price": 420 },
+      { "name": "Chalet Suite", "capacity": 4, "price": 650 }
+    ],
+    "reviews": [
+      { "author": "Hans W.", "score": 9.4, "comment": "Ski-in convenience and the spa is world-class. Matterhorn views are breathtaking.", "date": "2025-12-10" },
+      { "author": "Lisa F.", "score": 9.2, "comment": "Cozy fireplace lounge and exceptional fondue dinner.", "date": "2025-11-08" }
+    ]
+  },
+  {
+    "id": "10",
+    "name": "Dubai Marina Suites",
+    "location": "Dubai, UAE",
+    "type": "apartment",
+    "pricePerNight": 195,
+    "rating": 4.6,
+    "reviewCount": 891,
+    "stars": 5,
+    "amenities": ["Free WiFi", "Pool", "Gym", "Kitchen", "Sea view", "Concierge"],
+    "images": [
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdeb33?w=800&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
+    ],
+    "description": "High-rise luxury suites overlooking Dubai Marina with floor-to-ceiling windows, infinity pool, and premium amenities in one of the city's most sought-after neighborhoods.",
+    "roomTypes": [
+      { "name": "Marina View Studio", "capacity": 2, "price": 195 },
+      { "name": "One Bedroom Suite", "capacity": 3, "price": 310 },
+      { "name": "Penthouse with Jacuzzi", "capacity": 4, "price": 550 }
+    ],
+    "reviews": [
+      { "author": "Ahmed S.", "score": 9.0, "comment": "Stunning marina views and the infinity pool is incredible.", "date": "2025-11-30" },
+      { "author": "Rachel C.", "score": 8.7, "comment": "Spacious apartment with everything you need for a luxury stay.", "date": "2025-10-25" }
+    ]
+  }
+]
