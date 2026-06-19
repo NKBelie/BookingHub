@@ -21,7 +21,7 @@ export default function PropertyDetailPage() {
   if (!property) {
     return (
       <div className="container-main py-20 text-center">
-        <p className="text-2xl mb-2">🏨</p>
+        <svg className="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>
         <h1 className="text-xl font-bold mb-2">Property not found</h1>
         <Link to="/search" className="text-primary hover:underline text-sm">Back to search</Link>
       </div>
@@ -85,16 +85,22 @@ export default function PropertyDetailPage() {
         {/* Lightbox */}
         {lightbox && (
           <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
-            <button onClick={() => setLightbox(false)} className="absolute top-4 right-4 text-white text-3xl hover:text-gray-300">✕</button>
+            <button onClick={() => setLightbox(false)} className="absolute top-4 right-4 text-white hover:text-gray-300">
+              <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
             <button
               onClick={() => setActiveImg((i) => (i - 1 + property.images.length) % property.images.length)}
-              className="absolute left-4 text-white text-3xl hover:text-gray-300"
-            >‹</button>
+              className="absolute left-4 text-white hover:text-gray-300"
+            >
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
             <img src={property.images[activeImg]} alt="" className="max-h-full max-w-full rounded-lg" />
             <button
               onClick={() => setActiveImg((i) => (i + 1) % property.images.length)}
-              className="absolute right-4 text-white text-3xl hover:text-gray-300"
-            >›</button>
+              className="absolute right-4 text-white hover:text-gray-300"
+            >
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
             <p className="absolute bottom-4 text-white/70 text-sm">{activeImg + 1} / {property.images.length}</p>
           </div>
         )}
@@ -114,7 +120,7 @@ export default function PropertyDetailPage() {
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {property.amenities.map((amenity) => (
                   <div key={amenity} className="flex items-center gap-2 text-sm text-gray-700">
-                    <span className="text-success">✓</span>
+                    <svg className="w-4 h-4 text-success shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                     {amenity}
                   </div>
                 ))}
@@ -138,7 +144,13 @@ export default function PropertyDetailPage() {
                     {property.roomTypes.map((room) => (
                       <tr key={room.name} className={`border-b border-border last:border-0 ${selectedRoom?.name === room.name ? 'bg-blue-50' : ''}`}>
                         <td className="py-3 font-medium text-gray-900">{room.name}</td>
-                        <td className="py-3 text-muted">{'👤'.repeat(room.capacity)}</td>
+                        <td className="py-3 text-muted">
+                          <span className="flex items-center gap-0.5">
+                            {Array.from({ length: room.capacity }).map((_, i) => (
+                              <svg key={i} className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" /></svg>
+                            ))}
+                          </span>
+                        </td>
                         <td className="py-3 font-bold text-gray-900">{formatPrice(room.price)}</td>
                         <td className="py-3">
                           <button
