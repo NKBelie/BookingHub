@@ -5,6 +5,22 @@ import { formatPrice } from '../utils/helpers'
 
 const discounts = [20, 15, 25, 18, 30, 12]
 
+function HeartButton() {
+  const [liked, setLiked] = useState(false)
+  return (
+    <button
+      type="button"
+      onClick={(e) => { e.preventDefault(); setLiked((v) => !v) }}
+      className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-white/80 hover:bg-white transition-colors shadow"
+      aria-label="Save to wishlist"
+    >
+      <svg className={`w-5 h-5 transition-colors ${liked ? 'fill-red-500 text-red-500' : 'fill-none text-gray-500'}`} viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
+      </svg>
+    </button>
+  )
+}
+
 export default function DealsCarousel() {
   const deals = properties.slice(0, 6)
   const [start, setStart] = useState(0)
@@ -17,8 +33,8 @@ export default function DealsCarousel() {
       <div className="container-main">
         <div className="flex items-end justify-between mb-5">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Deals &amp; special offers</h2>
-            <p className="text-muted text-sm mt-1">Promotions, deals, and special offers for you</p>
+            <h2 className="text-2xl font-bold text-gray-900">Deals for the weekend</h2>
+            <p className="text-muted text-sm mt-1">Save on stays for June 26 - June 28</p>
           </div>
           <div className="flex gap-2 shrink-0">
             <button
@@ -57,9 +73,7 @@ export default function DealsCarousel() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
-                  <div className="absolute top-3 left-3 bg-[#cc0000] text-white text-xs font-bold px-2 py-1 rounded">
-                    -{discount}%
-                  </div>
+                  <HeartButton />
                 </div>
                 <div className="p-4 flex flex-col flex-1">
                   <p className="font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-1">
