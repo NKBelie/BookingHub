@@ -48,8 +48,8 @@ export default function PropertyTypeTabs() {
         </Link>
       </div>
 
-      {/* Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-4" style={{ scrollbarWidth: 'none' }}>
+      {/* Tabs — scrollable on mobile/tablet, static wrap on lg+ */}
+      <div className="flex items-center gap-2 overflow-x-auto lg:overflow-x-visible lg:flex-wrap pb-4" style={{ scrollbarWidth: 'none' }}>
         {tabs.map(({ type, label, icon }) => {
           const active = activeType === type
           return (
@@ -76,7 +76,9 @@ export default function PropertyTypeTabs() {
         ))}
         {filtered.length === 0 && (
           <div className="col-span-4 text-center py-14 bg-white rounded-xl border border-border">
-            <p className="text-3xl mb-2">🏨</p>
+            <svg className="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+            </svg>
             <p className="font-semibold text-gray-900">No properties found</p>
             <p className="text-sm text-muted mt-1">Try a different category</p>
           </div>

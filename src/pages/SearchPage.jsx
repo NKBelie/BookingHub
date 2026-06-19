@@ -108,7 +108,7 @@ export default function SearchPage() {
         <div className="flex gap-6">
           {/* Desktop filters */}
           <div className="hidden lg:block w-64 shrink-0">
-            <div className="bg-white rounded-lg border border-border p-5 sticky top-24">
+            <div className="bg-white rounded-lg border border-border p-5">
               <Filters />
             </div>
           </div>
