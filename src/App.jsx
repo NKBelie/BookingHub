@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-//import { SearchProvider } from './components/context/SearchContext'
+import { SearchProvider } from './context/SearchContext'
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
 import SearchPage from './pages/SearchPage'
@@ -9,6 +9,7 @@ import SignupPage from './pages/SignupPage'
 
 export default function App() {
   return (
+    <SearchProvider>
     <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
@@ -20,5 +21,6 @@ export default function App() {
           <Route path="signup" element={<SignupPage />} />
         </Routes>
     </BrowserRouter>
+    </SearchProvider>
   )
 }
