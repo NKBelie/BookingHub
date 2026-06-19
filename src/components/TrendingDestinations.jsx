@@ -24,18 +24,15 @@ function DestCard({ city, country, flag, image, properties, aspect = '2/1' }) {
         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         loading="lazy"
       />
-      {/* Bottom overlay */}
-      <div className="absolute inset-0 bg-linear-to-t from-black/55 via-transparent to-transparent" />
-      <div className="absolute bottom-0 left-0 p-3 flex items-end gap-1.5">
-        <div>
-          <div className="flex items-center gap-1.5">
-            <span className="text-white font-bold text-base leading-tight">{city}</span>
-            {flag && (
-              <img src={flag} alt={country} className="w-5 h-5 object-cover rounded-sm" loading="lazy" />
-            )}
-          </div>
-          <p className="text-white/80 text-xs mt-0.5">{properties.toLocaleString()} properties</p>
+      <div className="absolute inset-0 bg-black/20" />
+      <div className="absolute top-0 left-0 p-3">
+        <div className="flex items-center gap-1.5">
+          <span className="text-white font-bold text-base leading-tight drop-shadow">{city}</span>
+          {flag && (
+            <img src={flag} alt={country} className="w-5 h-5 object-cover rounded-sm" loading="lazy" />
+          )}
         </div>
+        <p className="text-white/90 text-xs mt-0.5 drop-shadow">{properties.toLocaleString()} properties</p>
       </div>
     </Link>
   )
