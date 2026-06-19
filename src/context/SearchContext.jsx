@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback } from 'react'
-//import { getTodayString, addDays } from '../../utils/helpers'
+import { getTodayString, addDays } from '../utils/helpers'
 
 const SearchContext = createContext(null)
 
@@ -51,7 +51,9 @@ export function SearchProvider({ children }) {
     }
 
     export function useSearch() {
-    // const context = useContext(SearchContext)
-    // if (!context) throw new Error('useSearch must be used within a SearchProvider')
-    // return context
+    const context = useContext(SearchContext)
+    if (!context) {
+        throw new Error('useSearch must be used within a SearchProvider')
+    }
+    return context
 }
