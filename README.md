@@ -23,13 +23,15 @@ A Booking.com-inspired hotel and property booking web application built with Rea
 - Node.js 18+
 - npm
 
+### Create React Project
+
+```bash
+npm create vite@latest
+```
+
 ### Installation
 
 ```bash
-# Clone the repository
-git clone <your-repo-url>
-cd bookinghub
-
 # Install dependencies
 npm install
 
@@ -50,7 +52,7 @@ npm run lint       # Run ESLint
 
 ## Project Structure
 
-``
+```text
 bookinghub/
 ├── public/
 │   ├── favicon.svg
@@ -64,12 +66,12 @@ bookinghub/
 │   │   │   ├── StarRating.jsx       # Star rating display
 │   │   │   └── Button.jsx           # Reusable button component
 │   │   ├── Header.jsx               # Sticky header with service tabs & nav
-│   │   ├── Footer.jsx               # Footer with links, payment icons, app download
+│   │   ├── Footer.jsx               # Footer with links and copyright
 │   │   ├── Layout.jsx               # Page layout wrapper (Header + Outlet + Footer)
-│   │   ├── HeroSection.jsx          # Hero banner with sign-in prompt & search card
+│   │   ├── HeroSection.jsx          # Hero banner with search card
 │   │   ├── PropertyCard.jsx         # Property card (vertical & horizontal layouts)
 │   │   ├── PropertyTypeTabs.jsx     # Filterable tabs (Hotels, Apartments, Resorts, Villas)
-│   │   ├── TrendingDestinations.jsx # Mosaic destination grid
+│   │   ├── TrendingDestinations.jsx # Destination image grid
 │   │   └── DealsCarousel.jsx        # Deals & special offers carousel
 │   ├── context/
 │   │   └── SearchContext.jsx        # Global search state (destination, dates, guests)
@@ -89,7 +91,87 @@ bookinghub/
 ├── package.json
 ├── vite.config.js
 └── README.md
-``
+```
+
+---
+
+## Navigation & Routing
+
+This app uses **React Router DOM v7** for client-side navigation. No full page reloads happen — React swaps components in and out based on the URL.
+
+### How routing is set up — `App.jsx`
+
+```jsx
+<BrowserRouter>
+  <SearchProvider>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="search" element={<SearchPage />} />
+        <Route path="property/:id" element={<PropertyDetailPage />} />
+      </Route>
+      <Route path="login" element={<LoginPage />} />
+      <Route path="signup" element={<SignupPage />} />
+    </Routes>
+  </SearchProvider>
+</BrowserRouter>
+```
+
+- `BrowserRouter` — enables URL-based navigation using the browser history API
+- `SearchProvider` — wraps the whole app so every page can access search state
+- `Routes` — container that matches the current URL to a route
+- `Route element={<Layout />}` — a parent route that renders the shared Header and Footer via `<Outlet />`
+- `<Route index>` — matches the root path `/` exactly
+- `path="property/:id"` — `:id` is a dynamic segment; the value is read with `useParams()` inside the page
+
+### Route map
+
+```text
+/                    → HomePage       (inside Layout)
+/search              → SearchPage     (inside Layout)
+/search?type=hotel   → SearchPage     (filters by type on load)
+/property/:id        → PropertyDetailPage (inside Layout)
+/login               → LoginPage      (no Layout — full screen)
+/signup              → SignupPage     (no Layout — full screen)
+```
+
+### Layout component — `Layout.jsx`
+
+`Layout.jsx` wraps every main page with the sticky `Header` at the top and `Footer` at the bottom. The `<Outlet />` is where the matched child page renders.
+
+```jsx
+export default function Layout() {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-1">
+        <Outlet />   {/* HomePage, SearchPage, or PropertyDetailPage renders here */}
+      </main>
+      <Footer />
+    </div>
+  )
+}
+```
+
+Login and Signup are placed **outside** the Layout route so they render as standalone full-screen pages without the header and footer.
+
+### Navigation between pages
+
+Pages link to each other using React Router's `<Link>` and `<NavLink>` components instead of plain `<a>` tags. This prevents full page reloads.
+
+```jsx
+// Plain navigation link
+<Link to="/search">Search</Link>
+
+// Programmatic navigation after form submit
+const navigate = useNavigate()
+navigate('/search')
+
+// Active-aware link (adds styling when URL matches)
+<NavLink to="/search" className={({ isActive }) => isActive ? 'text-white' : 'text-white/70'}>
+  Stays
+</NavLink>
+```
 
 ---
 
@@ -97,85 +179,219 @@ bookinghub/
 
 ### Home (`/`)
 
-- Hero section with sign-in savings banner and search card
-- "I'm travelling for work" checkbox
-- USP strip — 4 trust cards (free cancellation, reviews, properties, support)
-- Trending destinations mosaic grid
-- Deals & special offers carousel with heart wishlist toggle
-- Property type tabs (All, Hotels, Apartments, Resorts, Villas) filtering property cards
+The landing page. Composed of multiple sections stacked vertically:
+
+1. **HeroSection** — navy banner with the search card overlapping below it
+2. **USP strip** — 4 trust cards (free cancellation, reviews, properties, 24/7 support)
+3. **PropertyTypeTabs** — pill buttons filtering the featured property grid
+4. **TrendingDestinations** — 2-row image grid of popular cities
+5. **Genius banner** — sign-in prompt with Register and Sign in buttons
+6. **DealsCarousel** — 3 deal cards at a time with prev/next pagination
+7. **Homes guests love** — 4 property cards filtered by the active tab
 
 ### Search (`/search`)
 
-- Compact search bar at the top
-- Left sidebar filters: property type, max price slider, amenities checkboxes
-- Sort options: Recommended, Price low/high, Top reviewed
+Displays filtered and sorted property results.
+
+- Compact search bar at the top (reuses `SearchCard` in compact mode)
+- Left sidebar with property type checkboxes, price range slider, and amenities filters (desktop only)
+- Mobile filter drawer — slides in from the right on small screens
+- Sort dropdown — Recommended, Price low/high, Top reviewed
 - Results count with destination label
-- Mobile filter drawer
-- Horizontal property cards with heart toggle
+- Horizontal `PropertyCard` layout for each result
+
+URL query params are read on load:
+
+```text
+/search?type=hotel          → pre-selects Hotels filter
+/search?destination=Paris   → pre-filters by destination name
+```
 
 ### Property Detail (`/property/:id`)
 
-- Breadcrumb navigation
-- Photo gallery with lightbox (click to open, arrow navigation)
-- Title, star rating, Genius badge, location, review score
-- Free cancellation banner
-- About the property description
-- Amenities grid
-- Available rooms table with Reserve button
-- Guest reviews with avatar initials
-- Sticky booking widget with date picker, guest selector, price breakdown
+Detailed view for a single property. The `:id` param is matched against `properties.json`.
+
+- Breadcrumb: Home / Search / Property name
+- Photo gallery — 2-column grid (1 large + 4 smaller), click any to open lightbox
+- Lightbox — fullscreen overlay with prev/next arrow navigation
+- Title, star rating, location, review score badge
+- About section — property description
+- Amenities grid with checkmark icons
+- Available rooms table — select a room to update the booking widget price
+- Guest reviews — author, score badge, comment, date
+- Sticky booking widget (desktop) — date inputs, guest selector, price breakdown, Reserve button
 
 ### Login (`/login`)
 
-- Email & password form
-- Google sign-in option
-- Link to register
+Standalone full-screen page (no header/footer).
+
+- Email and password inputs
+- Google sign-in button (UI only)
+- Link to Register page
 
 ### Register (`/signup`)
 
-- First name, last name, email, password
-- Terms & Privacy Policy links
-- Link to sign in
+Standalone full-screen page (no header/footer).
+
+- First name, last name, email, password inputs
+- Terms and Privacy Policy links
+- Link to Sign in page
 
 ---
 
 ## Key Components
 
-### SearchCard
+### Header — `src/components/Header.jsx`
 
-Located in `src/components/ui/SearchCard.jsx`. Connects to `SearchContext` for global state. Features:
+Sticky header that stays at the top of the screen as you scroll. Contains two rows:
 
-- Destination text input with search icon
-- Check-in / Check-out date pickers
-- Guests dropdown (Adults, Children, Rooms) with +/− controls
-- Navigates to `/search` on submit
+1. **Top row** — BookStay logo, language/currency buttons, List your property, Sign in, Register
+2. **Service tabs row** — Stays, Flights, Car rentals, Attractions, Airport taxis (each with an SVG icon)
 
-### SearchContext
+On mobile the service tabs are hidden and replaced with a hamburger button that toggles a full-width dropdown menu. Uses `useState` for `menuOpen`.
 
-Located in `src/context/SearchContext.jsx`. Provides global state for:
+### HeroSection — `src/components/HeroSection.jsx`
 
-- `destination`, `checkIn`, `checkOut`, `guests`
-- `propertyType`, `sortBy`, `priceRange`, `selectedAmenities`
-- `updateSearch()`, `resetFilters()`, `toggleAmenity()`
+Renders the navy hero banner with the heading and subtitle. The `SearchCard` sits outside the section with a negative top margin (`-mt-16`) so it visually overlaps the bottom of the banner.
 
-> The `SearchProvider` must wrap the app in `App.jsx` for all pages to access search state.
+### SearchCard — `src/components/ui/SearchCard.jsx`
 
-### PropertyCard
+The main search form. Accepts a `compact` prop — when `true` it renders in a smaller single-line layout for the Search page header.
 
-Located in `src/components/PropertyCard.jsx`. Supports two layouts:
+Fields:
 
-- `layout="vertical"` — used in homepage grid (image top, details below)
-- `layout="horizontal"` — used in search results (image left, details right)
+| Field | State | Behaviour |
+| --- | --- | --- |
+| Destination | `localDest` | Free text input |
+| Dates | `localCheckIn`, `localCheckOut` | Click to open date picker dropdown |
+| Guests | `localGuests` | Click to open guests/rooms counter |
 
-Both layouts include a heart wishlist button with `useState` toggle (outline → filled red).
+On submit, values are written to `SearchContext` via `updateSearch()` and the user is navigated to `/search`.
 
-### PropertyTypeTabs
+The "I'm traveling for work" checkbox at the bottom matches the real Booking.com search bar.
 
-Located in `src/components/PropertyTypeTabs.jsx`. Self-contained with its own `useState`:
+### PropertyCard — `src/components/PropertyCard.jsx`
 
-- Tabs: All stays, Hotels, Apartments, Resorts, Villas
-- Filters and renders property cards below
-- Scrollable on mobile/tablet, wraps statically on large screens
+Reusable card that supports two layouts controlled by the `layout` prop:
+
+- `layout="vertical"` — image on top, details below. Used in the homepage grid.
+- `layout="horizontal"` — image on the left, details on the right. Used in search results.
+
+Both layouts show name, location, star rating, description excerpt, amenities chips, price per night, and a rating badge.
+
+### PropertyTypeTabs — `src/components/PropertyTypeTabs.jsx`
+
+Horizontally scrollable row of pill buttons on the home page. Clicking a tab filters the "Homes guests love" grid below it. Uses local `useState` for `activeType`. On the Search page, filters are handled separately in the sidebar.
+
+### TrendingDestinations — `src/components/TrendingDestinations.jsx`
+
+Two-row image grid matching Booking.com's destination postcard layout:
+
+- Row 1 — two wide cards at `2:1` aspect ratio
+- Row 2 — three portrait cards at `4:3` aspect ratio
+
+Each card links to `/search?destination=CityName`.
+
+### DealsCarousel — `src/components/DealsCarousel.jsx`
+
+Shows 3 deal cards at a time from the properties list. Prev/next arrow buttons shift the visible window by one. Uses `useState` for `start` index. Each card shows a heart wishlist toggle button.
+
+### RatingBadge — `src/components/ui/RatingBadge.jsx`
+
+Displays a score like `8.5` in a navy rounded badge with a label like "Excellent". The label is derived from the score range.
+
+| Score | Label |
+| --- | --- |
+| 9+ | Exceptional |
+| 8–9 | Excellent |
+| 7–8 | Very Good |
+| 6–7 | Good |
+| Below 6 | Okay |
+
+### StarRating — `src/components/ui/StarRating.jsx`
+
+Renders a row of filled/empty star SVG icons based on a `stars` prop (1–5). Used on property cards and the detail page.
+
+---
+
+## State Management
+
+### Local state with useState
+
+`useState` is used in individual components for UI state that only that component needs to know about.
+
+**Syntax:**
+
+```jsx
+const [value, setValue] = useState(initialValue)
+```
+
+- `value` — the current value you read in JSX
+- `setValue` — call this to update the value and trigger a re-render
+- `initialValue` — what the value starts as (runs only on first render)
+
+**Where it is used in this project:**
+
+```text
+Header.jsx            → menuOpen       controls mobile menu open/closed
+HomePage.jsx          → activeType     tracks which property type tab is active
+SearchCard.jsx        → localDest      destination text input value
+                      → localCheckIn   selected check-in date
+                      → localCheckOut  selected check-out date
+                      → localGuests    object with adults, children, rooms counts
+                      → showDates      controls date picker dropdown visibility
+                      → showGuests     controls guests dropdown visibility
+DealsCarousel.jsx     → start          index of first visible deal card
+PropertyDetailPage.jsx → activeImg     index of photo shown in lightbox
+                       → lightbox      controls lightbox overlay visibility
+                       → localCheckIn  booking widget check-in date
+                       → localCheckOut booking widget check-out date
+                       → localGuests   booking widget guest count
+                       → selectedRoom  which room type the user has selected
+```
+
+**Example — toggling the mobile menu:**
+
+```jsx
+const [menuOpen, setMenuOpen] = useState(false)
+
+<button onClick={() => setMenuOpen(!menuOpen)}>
+  Menu
+</button>
+
+{menuOpen && <nav>...</nav>}
+```
+
+**Example — updating a nested object (guests):**
+
+```jsx
+// Always spread the previous state to keep other fields intact
+setLocalGuests((g) => ({ ...g, adults: Math.max(1, g.adults - 1) }))
+```
+
+**Rules:**
+
+1. Never mutate state directly — always use the setter function
+2. Use the function form `(prev) => newValue` when the new value depends on the previous value
+3. Each `useState` call is independent — updating one does not affect others
+4. State is local to the component — other components cannot see it unless you pass it as a prop or lift it to a shared context
+
+### Global state with SearchContext
+
+`SearchContext` holds the search values that need to be shared across multiple pages (Home, Search, Property Detail). It is created with React's Context API and provided at the app root in `App.jsx`.
+
+```text
+SearchProvider (App.jsx)
+├── HomePage     → reads/writes destination, dates, guests via updateSearch()
+├── SearchPage   → reads destination, type to filter results
+└── PropertyDetailPage → reads checkIn, checkOut, guests for booking widget defaults
+```
+
+Any component can access search state by calling:
+
+```jsx
+const { destination, checkIn, checkOut, guests, updateSearch } = useSearch()
+```
 
 ---
 
@@ -193,8 +409,8 @@ Mock data lives in `src/data/properties.json` with 10 properties. Each property 
   "rating": 4.8,
   "reviewCount": 1243,
   "stars": 5,
-  "amenities": ["Free WiFi", "Pool", "Spa", ...],
-  "images": ["url1", "url2", ...],
+  "amenities": ["Free WiFi", "Pool", "Spa"],
+  "images": ["url1", "url2"],
   "description": "...",
   "roomTypes": [{ "name": "Classic Double", "capacity": 2, "price": 189 }],
   "reviews": [{ "author": "Marie L.", "score": 9.2, "comment": "...", "date": "2025-11-12" }]
@@ -210,10 +426,10 @@ Mock data lives in `src/data/properties.json` with 10 properties. Each property 
 Custom theme tokens are defined in `src/index.css` using Tailwind v4 `@theme`:
 
 ```css
---color-primary: #003580       /* Booking.com navy blue */
+--color-primary: #003580       /* navy blue */
 --color-primary-dark: #00224f
 --color-primary-light: #0057b8
---color-accent: #febb02        /* Booking.com yellow */
+--color-accent: #febb02        /* yellow */
 --color-border: #e7e7e7
 --color-muted: #6b6b6b
 --color-success: #008009
@@ -225,18 +441,19 @@ Custom theme tokens are defined in `src/index.css` using Tailwind v4 `@theme`:
 
 | Feature | Status |
 | --- | --- |
-| Property search with filters | ✅ |
-| Sort by price / rating | ✅ |
-| Property detail page | ✅ |
-| Photo gallery with lightbox | ✅ |
-| Room selection | ✅ |
-| Booking price breakdown | ✅ |
-| Wishlist / heart toggle | ✅ |
-| Responsive design (mobile → desktop) | ✅ |
-| Sticky header with service tabs | ✅ |
-| Mobile hamburger menu | ✅ |
-| Global search context | ✅ |
-| Login / Register pages | ✅ |
+| Property search with filters | Done |
+| Sort by price / rating | Done |
+| Property detail page | Done |
+| Photo gallery with lightbox | Done |
+| Room selection | Done |
+| Booking price breakdown | Done |
+| Deals carousel with pagination | Done |
+| Trending destinations grid | Done |
+| Responsive design (mobile to desktop) | Done |
+| Sticky header with service tabs | Done |
+| Mobile hamburger menu | Done |
+| Global search context | Done |
+| Login / Register pages | Done |
 
 ---
 
@@ -244,9 +461,9 @@ Custom theme tokens are defined in `src/index.css` using Tailwind v4 `@theme`:
 
 | Breakpoint | Width | Behaviour |
 | --- | --- | --- |
-| `sm` | 640px | Service tabs visible in header, 2-col grids |
-| `md` | 768px | Nav links (Sign in, Register) appear |
-| `lg` | 1024px | Sidebar filters visible, 4-col grids, tabs wrap |
+| `sm` | 640px | 2-column grids, date inputs in a row |
+| `md` | 768px | Auth buttons appear in header |
+| `lg` | 1024px | Sidebar filters visible, 4-column grids, full search bar row |
 
 ---
 
