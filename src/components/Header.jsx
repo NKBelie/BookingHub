@@ -28,9 +28,9 @@ const serviceTabs = [
     const [menuOpen, setMenuOpen] = useState(false)
 
     return (
-        <header className="sticky top-0 z-50 bg-primary">
+        <header className="bg-primary">
         <div className="container-main">
-            {/* Top row: logo + auth */}
+            
             <div className="flex items-center justify-between py-3">
             <Link to="/" className="flex items-center gap-0.5 shrink-0">
                 <span className="text-white font-bold text-[22px] tracking-tight leading-none">Booking.com</span>
@@ -58,7 +58,7 @@ const serviceTabs = [
 
             <button
                 type="button"
-                className="md:hidden p-2 text-white"
+                className="sm:hidden p-2 text-white"
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Toggle menu"
             >
@@ -69,18 +69,18 @@ const serviceTabs = [
             </button>
             </div>
 
-            {/* Service tabs — flush at bottom of header */}
-            <div className="hidden md:flex items-center overflow-x-auto">
+            {/* Service tabs — visible on tablet+ */}
+            <div className="hidden sm:flex items-center gap-1 overflow-x-auto pb-3">
             {serviceTabs.map(({ to, label, icon }) => (
                 <NavLink
                 key={label}
                 to={to}
                 end={to === '/search'}
                 className={({ isActive }) =>
-                    `flex items-center gap-1.5 px-3 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+                    `flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium border border-white/50 rounded-full transition-colors whitespace-nowrap ${
                     isActive
-                        ? 'border-white text-white'
-                        : 'border-transparent text-white/70 hover:text-white hover:border-white/50'
+                        ? 'bg-white/20 border-white text-white'
+                        : 'text-white/70 hover:text-white hover:bg-white/10 hover:border-white'
                     }`
                 }
                 >
@@ -89,11 +89,12 @@ const serviceTabs = [
                 </NavLink>
             ))}
             </div>
+            <div className="hidden sm:block border-t border-white/20" />
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile menu — only for xs screens (< sm) */}
         {menuOpen && (
-            <div className="md:hidden bg-primary-dark border-t border-white/10 pb-4">
+            <div className="sm:hidden bg-primary-dark border-t border-white/10 pb-4">
             <nav className="container-main flex flex-col pt-2">
                 {serviceTabs.map(({ to, label, icon }) => (
                 <NavLink
