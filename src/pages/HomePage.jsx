@@ -37,7 +37,7 @@ const usps = [
             I'm travelling for work
             </label>
         </div>
-        <div>
+        <div className="container-main text-2xl font-bold">
             <h1>Why Booking.com </h1>
         </div>
 
