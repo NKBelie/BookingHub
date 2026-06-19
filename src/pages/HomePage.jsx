@@ -1,13 +1,7 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import HeroSection from '../components/HeroSection'
 import PropertyTypeTabs from '../components/PropertyTypeTabs'
 import TrendingDestinations from '../components/TrendingDestinations'
 import DealsCarousel from '../components/DealsCarousel'
-import PropertyCard from '../components/PropertyCard'
-import properties from '../data/properties.json'
-
-const featured = properties.slice(0, 4)
 
 const usps = [
     {
@@ -33,24 +27,21 @@ const usps = [
     ]
 
     export default function HomePage() {
-    const [activeType, setActiveType] = useState('')
-
-    const filtered = activeType
-        ? properties.filter((p) => p.type === activeType).slice(0, 4)
-        : featured
-
     return (
         <>
         <HeroSection />
 
-        <div className="container-main">
-            <input type="checkbox" name="" id="" />
-            <span> I'm travelling for work</span>
+        <div className="container-main pt-3 pb-1">
+            <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer w-fit">
+            <input type="checkbox" className="accent-[#0071c2]" />
+            I'm travelling for work
+            </label>
         </div>
-        <div className="container-main py-6 text-3xl font-bold">
-            <h1>Why Booking.com</h1>
+        <div>
+            <h1>Why Booking.com </h1>
         </div>
-        {/* USP strip — matches Booking.com's 4-card horizontal layout */}
+
+        {/* USP strip */}
         <div className="border-b border-border">
             <div className="container-main py-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -69,25 +60,7 @@ const usps = [
 
         <DealsCarousel />
 
-        {/* Homes guests love */}
-        <section className="container-main py-6 pb-12">
-            <div className="flex items-center justify-between mb-4">
-            <div>
-                <h2 className="text-2xl font-bold text-gray-900">Homes guests love</h2>
-            </div>
-            <Link to="/search" className="text-sm text-[#0071c2] hover:underline font-medium">
-                Discover homes
-            </Link>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {filtered.map((property) => (
-                <PropertyCard key={property.id} property={property} layout="vertical" />
-            ))}
-            {filtered.length === 0 && (
-                <p className="col-span-4 text-center text-muted py-10 text-sm">No properties found for this type.</p>
-            )}
-            </div>
-        </section>
+        <PropertyTypeTabs />
         </>
     )
 }
